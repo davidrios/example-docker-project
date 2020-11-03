@@ -13,7 +13,9 @@ services:
       - postgres-db:/var/lib/postgresql/data
 
   backend:
-    image: python:3.8-alpine
+    build:
+      context: .
+      dockerfile: ./conf/backend/Dockerfile
     depends_on:
       - postgres-db
     env_file:
@@ -21,9 +23,11 @@ services:
     environment:
       - PYTHONDONTWRITEBYTECODE=1
     volumes:
+      - ./code:/code
+      - ./conf/backend/scripts:/scripts
       - backend-home:/home/user
     init: true
-    command: ['sleep', '365d']
+    command: ['/scripts/run.sh']
 
   frontend:
     image: node:14.15-alpine
