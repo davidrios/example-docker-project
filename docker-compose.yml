@@ -1,0 +1,40 @@
+version: '3.7'
+
+x-env_file:
+  &env_file
+  - ./.env
+
+services:
+  postgres-db:
+    image: postgres:13.0-alpine
+    env_file:
+      *env_file
+    volumes:
+      - postgres-db:/var/lib/postgresql/data
+
+  backend:
+    image: python:3.8-alpine
+    depends_on:
+      - postgres-db
+    env_file:
+      *env_file
+    environment:
+      - PYTHONDONTWRITEBYTECODE=1
+    volumes:
+      - backend-home:/home/user
+    init: true
+    command: ['sleep', '365d']
+
+  frontend:
+    image: node:14.15-alpine
+    env_file:
+      *env_file
+    volumes:
+      - frontend-home:/home/user
+    init: true
+    command: ['sleep', '365d']
+
+volumes:
+  postgres-db:
+  backend-home:
+  frontend-home:
