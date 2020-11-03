@@ -28,6 +28,8 @@ services:
       - backend-home:/home/user
     init: true
     command: ['/scripts/run.sh']
+    ports:
+      - '${APP_PORT}:${APP_PORT}'
 
   frontend:
     image: node:14.15-alpine
