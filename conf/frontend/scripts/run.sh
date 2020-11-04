@@ -2,4 +2,4 @@
 set -e
 . /scripts/base.sh
 
-sleep 365d
+exec /sbin/su-exec user quasar dev -p $APP_PORT

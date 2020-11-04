@@ -28,8 +28,6 @@ services:
       - backend-home:/home/user
     init: true
     command: ['/scripts/run.sh']
-    ports:
-      - '${APP_PORT}:${APP_PORT}'
 
   frontend:
     build:
@@ -43,6 +41,8 @@ services:
       - frontend-home:/home/user
     init: true
     command: ['/scripts/run.sh']
+    ports:
+      - '${APP_PORT}:${APP_PORT}'
 
 volumes:
   postgres-db:
