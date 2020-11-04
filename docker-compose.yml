@@ -41,8 +41,20 @@ services:
       - frontend-home:/home/user
     init: true
     command: ['/scripts/run.sh']
+
+  nginx:
+    image: nginx:1.19-alpine
+    env_file:
+      *env_file
+    depends_on:
+      - backend
+      - frontend
+    volumes:
+      - ./conf/nginx/nginx.conf.template:/etc/nginx/nginx.conf.template
+      - ./conf/nginx/run.sh:/run.sh
     ports:
       - '${APP_PORT}:${APP_PORT}'
+    command: ['/run.sh']
 
 volumes:
   postgres-db:
