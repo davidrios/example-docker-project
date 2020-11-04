@@ -52,6 +52,8 @@ module.exports = configure(function (ctx) {
     build: {
       vueRouterMode: 'hash', // available values: 'hash', 'history'
 
+      devtool: 'eval-source-map',
+
       // transpile: false,
 
       // Add dependencies for transpiling with Babel (Array of string/regex)
@@ -79,6 +81,29 @@ module.exports = configure(function (ctx) {
             exclude: /node_modules/
           })
         }
+      },
+      chainWebpack (chain) {
+        /* eslint-disable @typescript-eslint/restrict-plus-operands */
+        /* eslint-disable @typescript-eslint/no-unsafe-call */
+        /* eslint-disable @typescript-eslint/restrict-template-expressions */
+        /* eslint-disable @typescript-eslint/no-unsafe-member-access */
+        /* Sorry, but I'm not used to TypeScript, I wrote this function for plain JS 😅 */
+        chain.output.devtoolModuleFilenameTemplate(info => {
+          var $filename = `webpack://${info.namespace}/${info.resourcePath}`
+          if (info.loaders != null) {
+            $filename += `?${info.loaders}`
+          }
+
+          if (info.resourcePath.match(/\.vue$/)) {
+            if (info.query.match(/type=script/) && info.moduleId === '') {
+              $filename = 'webpack://' + '/./' + info.resourcePath
+            } else {
+              $filename = 'webpack-generated:///' + info.resourcePath + '?' + info.hash
+            }
+          }
+
+          return $filename
+        })
       }
     },
 
