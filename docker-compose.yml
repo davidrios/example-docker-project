@@ -32,13 +32,17 @@ services:
       - '${APP_PORT}:${APP_PORT}'
 
   frontend:
-    image: node:14.15-alpine
+    build:
+      context: .
+      dockerfile: ./conf/frontend/Dockerfile
     env_file:
       *env_file
     volumes:
+      - ./code:/code
+      - ./conf/frontend/scripts:/scripts
       - frontend-home:/home/user
     init: true
-    command: ['sleep', '365d']
+    command: ['/scripts/run.sh']
 
 volumes:
   postgres-db:
