@@ -1,0 +1,9 @@
+{
+    "name": "example project: backend",
+    "dockerComposeFile": "../../../docker-compose.yml",
+    "service": "backend",
+    "workspaceFolder": "/code/vscode/backend/backend.code-workspace",
+    "shutdownAction": "none",  // don't stop the container upon closing Code
+    "remoteUser": "user",
+    "extensions": ["ms-python.python"]
+  }

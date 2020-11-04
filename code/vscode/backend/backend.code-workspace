@@ -1,0 +1,38 @@
+{
+	"folders": [
+		{
+			"path": "/code/backend"
+		}
+		// you can add more folders here if you have more Python sources
+	],
+	"settings": {
+		"python.pythonPath": "/venv/bin/python",
+		"python.linting.pylintEnabled": false,
+		"python.linting.flake8Enabled": true,
+		"python.linting.flake8Args": [
+			"--config=/code/vscode/backend/flake8.ini"
+		],
+		"python.linting.flake8CategorySeverity.E": "Warning",  // personal preference
+		"files.trimFinalNewlines": true,
+		"files.trimTrailingWhitespace": true,
+		"files.insertFinalNewline": true,
+		"editor.detectIndentation": false,
+		"editor.tabSize": 4,
+		"editor.insertSpaces": true
+		// any other settings of your liking
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "Debug",
+				"type": "python",
+				"request": "attach",
+				"connect": {
+					"host": "localhost",
+					"port": 5678
+				}
+			}
+		]
+	}
+}
