@@ -1,0 +1,12 @@
+{
+    "name": "example project: frontend",
+    "dockerComposeFile": "../../../docker-compose.yml",
+    "service": "frontend",
+    "workspaceFolder": "/code/frontend",
+    "shutdownAction": "none",
+    "remoteUser": "user",
+    "extensions": [
+      "dbaeumer.vscode-eslint",
+      "octref.vetur"
+    ]
+  }
