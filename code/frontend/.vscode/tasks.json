@@ -1,0 +1,38 @@
+{
+  "version": "2.0.0",
+  "configurations": [
+    {
+      "name": "Attach to Chrome",
+      "port": 9222,
+      "request": "attach",
+      "type": "pwa-chrome",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "name": "Launch Chrome",
+      "request": "launch",
+      "type": "chrome",
+      "url": "http://localhost:${input:app_port}",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "type": "firefox",
+      "request": "launch",
+      "reAttach": true,
+      "name": "Launch Firefox",
+      "url": "http://localhost:${input:app_port}/",
+      "webRoot": "${workspaceFolder}",
+      "pathMappings": [
+        { "url": "webpack:///src/", "path": "${webRoot}/src/" }
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "id": "app_port",
+      "type": "promptString",
+      "description": "APP_PORT defined in the .env file",
+      "default": "8000"
+    }
+  ]
+}
